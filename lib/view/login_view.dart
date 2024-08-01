@@ -50,7 +50,9 @@ class LoginView extends StatelessWidget {
           ),
           Row(
             children: [
-              ElevatedButton(onPressed: () {}, child: Text('data')),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: Image.asset("assets/icons8-buying-48.png")),
             ],
           )
         ],
