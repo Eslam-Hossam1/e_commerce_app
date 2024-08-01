@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:e_commerce_app/helper/add_space.dart';
 import 'package:e_commerce_app/widgets/login_form.dart';
 import 'package:e_commerce_app/widgets/svg_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class SignupView extends StatelessWidget {
+  const SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,11 @@ class LoginView extends StatelessWidget {
           addHieghtSpace(8),
           ListTile(
             title: Text(
-              "Login",
+              "Sign Up",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              "Login to continue using the app",
+              "Sign Up to continue using the app",
               style: TextStyle(color: Colors.grey.shade500),
             ),
           ),
@@ -42,7 +43,7 @@ class LoginView extends StatelessWidget {
                     child: Divider(
                   endIndent: 10,
                 )),
-                Text("Or Login With"),
+                Text("Or Sign Up With"),
                 Expanded(
                     child: Divider(
                   indent: 10,

@@ -30,11 +30,11 @@ class _LoginFormState extends State<LoginForm> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              addHieghtSpace(12),
+              addHieghtSpace(8),
               CustomeTextFormField(
                 hintText: "Email",
               ),
-              addHieghtSpace(24),
+              addHieghtSpace(12),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -42,7 +42,7 @@ class _LoginFormState extends State<LoginForm> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              addHieghtSpace(12),
+              addHieghtSpace(8),
               CustomeObsecureTextFormField(
                 hintText: "Password",
               ),
