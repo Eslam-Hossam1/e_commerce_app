@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 class CustomeObsecureTextFormField extends StatefulWidget {
   const CustomeObsecureTextFormField({
     super.key,
-    this.onTap,
     required this.hintText,
+    this.onSaved,
   });
   final String hintText;
-  final void Function()? onTap;
-
+  final void Function(String?)? onSaved;
   @override
   State<CustomeObsecureTextFormField> createState() =>
       _CustomeObsecureTextFormFieldState();
@@ -18,6 +17,7 @@ class CustomeObsecureTextFormField extends StatefulWidget {
 class _CustomeObsecureTextFormFieldState
     extends State<CustomeObsecureTextFormField> {
   late bool isObsecure;
+
   @override
   void initState() {
     super.initState();
@@ -34,8 +34,8 @@ class _CustomeObsecureTextFormFieldState
           return null;
         }
       },
+      onSaved: widget.onSaved,
       obscureText: isObsecure,
-      onTap: widget.onTap,
       decoration: InputDecoration(
           suffixIcon: IconButton(
             onPressed: () {

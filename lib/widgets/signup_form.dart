@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/view/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/helper/add_space.dart';
 import 'package:e_commerce_app/widgets/custome_elevated_button.dart';
@@ -13,6 +15,9 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
+  late String username;
+  late String email;
+  late String password;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
   @override
@@ -45,6 +50,9 @@ class _SignupFormState extends State<SignupForm> {
               ),
               addHieghtSpace(8),
               CustomeTextFormField(
+                onSaved: (value) {
+                  email = value!;
+                },
                 hintText: "Email",
               ),
               addHieghtSpace(12),
@@ -57,10 +65,37 @@ class _SignupFormState extends State<SignupForm> {
               ),
               addHieghtSpace(8),
               CustomeObsecureTextFormField(
+                onSaved: (value) {
+                  password = value!;
+                },
                 hintText: "Password",
               ),
               addHieghtSpace(32),
               CustomeElevatedButton(
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const HomeView();
+                      }));
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  }
+                },
                 text: "Sign Up",
               )
             ],
