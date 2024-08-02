@@ -1,7 +1,9 @@
 import 'package:e_commerce_app/helper/add_space.dart';
+import 'package:e_commerce_app/view/home_view.dart';
 import 'package:e_commerce_app/widgets/custome_elevated_button.dart';
 import 'package:e_commerce_app/widgets/custome_obsecure_text_form_field.dart';
 import 'package:e_commerce_app/widgets/custome_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
@@ -12,6 +14,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  late String email;
+  late String password;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
   @override
@@ -33,6 +37,9 @@ class _LoginFormState extends State<LoginForm> {
               addHieghtSpace(8),
               CustomeTextFormField(
                 hintText: "Email",
+                onSaved: (value) {
+                  email = value!;
+                },
               ),
               addHieghtSpace(12),
               Align(
@@ -45,6 +52,9 @@ class _LoginFormState extends State<LoginForm> {
               addHieghtSpace(8),
               CustomeObsecureTextFormField(
                 hintText: "Password",
+                onSaved: (value) {
+                  password = value!;
+                },
               ),
               addHieghtSpace(12),
               Align(
@@ -55,6 +65,26 @@ class _LoginFormState extends State<LoginForm> {
                   )),
               addHieghtSpace(12),
               CustomeElevatedButton(
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: email, password: password);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return HomeView();
+                      }));
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        print('No user found for that email.');
+                      } else if (e.code == 'wrong-password') {
+                        print('Wrong password provided for that user.');
+                      }
+                    }
+                  }
+                },
                 text: "Login",
               )
             ],
