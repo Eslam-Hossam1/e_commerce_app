@@ -44,7 +44,10 @@ class SignupView extends StatelessWidget {
               Text("Already have an account? "),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return LoginView();
+                  }));
                 },
                 child: Text(
                   "Log in",

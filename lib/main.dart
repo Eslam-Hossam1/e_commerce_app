@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/firebase_options.dart';
+import 'package:e_commerce_app/view/home_view.dart';
 import 'package:e_commerce_app/view/login_view.dart';
 import 'package:e_commerce_app/view/signup_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,9 +36,11 @@ class _ECommerceAppState extends State<ECommerceApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const LoginView()
+          : const HomeView(),
     );
   }
 }

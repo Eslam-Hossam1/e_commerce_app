@@ -74,7 +74,8 @@ class LoginView extends StatelessWidget {
               Text("Don't have an account? "),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return SignupView();
                   }));
                 },
