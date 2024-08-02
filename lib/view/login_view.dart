@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/helper/add_space.dart';
+import 'package:e_commerce_app/view/signup_view.dart';
 import 'package:e_commerce_app/widgets/login_form.dart';
 import 'package:e_commerce_app/widgets/svg_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,11 @@ class LoginView extends StatelessWidget {
             children: [
               Text("Don't have an account? "),
               GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignupView();
+                  }));
+                },
                 child: Text(
                   "Register",
                   style: TextStyle(color: Colors.blue),

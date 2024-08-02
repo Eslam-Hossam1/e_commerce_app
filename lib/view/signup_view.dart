@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/view/login_view.dart';
+import 'package:e_commerce_app/widgets/signup_form.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/helper/add_space.dart';
 import 'package:e_commerce_app/widgets/login_form.dart';
@@ -34,47 +36,18 @@ class SignupView extends StatelessWidget {
             ),
           ),
           addHieghtSpace(8),
-          LoginForm(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-            child: Row(
-              children: [
-                Expanded(
-                    child: Divider(
-                  endIndent: 10,
-                )),
-                Text("Or Sign Up With"),
-                Expanded(
-                    child: Divider(
-                  indent: 10,
-                ))
-              ],
-            ),
-          ),
-          addHieghtSpace(12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SvgElevatedButton(
-                svgImagePath: "assets/icons8-facebook.svg",
-                color: Colors.blue,
-              ),
-              SvgElevatedButton(
-                svgImagePath: "assets/icons8-google.svg",
-              ),
-              SvgElevatedButton(
-                svgImagePath: "assets/icons8-apple.svg",
-              ),
-            ],
-          ),
-          addHieghtSpace(24),
+          SignupForm(),
+          addHieghtSpace(30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't have an account? "),
+              Text("Already have an account? "),
               GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
                 child: Text(
-                  "Register",
+                  "Log in",
                   style: TextStyle(color: Colors.blue),
                 ),
               )

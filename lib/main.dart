@@ -19,7 +19,7 @@ class ECommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignupView(),
+      home: LoginView(),
     );
   }
 }
