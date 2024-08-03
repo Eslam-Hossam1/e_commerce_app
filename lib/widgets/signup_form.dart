@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/view/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class _SignupFormState extends State<SignupForm> {
   late String email;
   late String password;
   final GlobalKey<FormState> formKey = GlobalKey();
-  AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -87,13 +89,17 @@ class _SignupFormState extends State<SignupForm> {
                       }));
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {
-                        print('The password provided is too weak.');
+                        log('The password provided is too weak.');
                       } else if (e.code == 'email-already-in-use') {
-                        print('The account already exists for that email.');
+                        log('The account already exists for that email.');
                       }
                     } catch (e) {
-                      print(e);
+                      log(e.toString());
                     }
+                  } else {
+                    setState(() {
+                      autovalidateMode = AutovalidateMode.always;
+                    });
                   }
                 },
                 text: "Sign Up",

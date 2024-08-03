@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/firebase_options.dart';
 import 'package:e_commerce_app/view/home_view.dart';
 import 'package:e_commerce_app/view/login_view.dart';
@@ -27,9 +29,9 @@ class _ECommerceAppState extends State<ECommerceApp> {
     super.initState();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('User is currently signed out!');
+        log('User is currently signed out!');
       } else {
-        print('User is signed in!');
+        log('User is signed in!');
       }
     });
   }

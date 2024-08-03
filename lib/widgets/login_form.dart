@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/helper/add_space.dart';
 import 'package:e_commerce_app/view/home_view.dart';
 import 'package:e_commerce_app/widgets/custome_elevated_button.dart';
@@ -17,7 +19,7 @@ class _LoginFormState extends State<LoginForm> {
   late String email;
   late String password;
   final GlobalKey<FormState> formKey = GlobalKey();
-  AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -78,11 +80,15 @@ class _LoginFormState extends State<LoginForm> {
                       }));
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
-                        print('No user found for that email.');
+                        log('No user found for that email.');
                       } else if (e.code == 'wrong-password') {
-                        print('Wrong password provided for that user.');
+                        log('Wrong password provided for that user.');
                       }
                     }
+                  } else {
+                    setState(() {
+                      autovalidateMode = AutovalidateMode.always;
+                    });
                   }
                 },
                 text: "Login",
