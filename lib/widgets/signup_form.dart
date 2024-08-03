@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:e_commerce_app/view/home_view.dart';
+import 'package:e_commerce_app/view/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/helper/add_space.dart';
@@ -83,9 +84,12 @@ class _SignupFormState extends State<SignupForm> {
                         email: email,
                         password: password,
                       );
+                      FirebaseAuth.instance.currentUser!
+                          .sendEmailVerification();
+                      log("pls go verify your email nigga");
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) {
-                        return const HomeView();
+                        return const LoginView();
                       }));
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'weak-password') {

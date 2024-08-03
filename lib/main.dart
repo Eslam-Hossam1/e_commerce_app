@@ -40,9 +40,10 @@ class _ECommerceAppState extends State<ECommerceApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FirebaseAuth.instance.currentUser == null
-          ? const LoginView()
-          : const HomeView(),
+      home: (FirebaseAuth.instance.currentUser != null &&
+              FirebaseAuth.instance.currentUser!.emailVerified)
+          ? const HomeView()
+          : const LoginView(),
     );
   }
 }
